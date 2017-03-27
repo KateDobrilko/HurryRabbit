@@ -20,8 +20,9 @@ export default {
         loaders: [
             {
                 test: /\.js$/,
-                include: path.join(__dirname, 'client'),
-                loaders: [ 'babel-loader']
+                include: [path.join(__dirname, 'client'),
+                    path.join(__dirname, 'server/shared')],
+                loaders: ['babel-loader']
             },
         ]
     },
