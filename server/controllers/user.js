@@ -16,3 +16,20 @@ export async function getCurrentUser(req, res, next) {
     }
     return res.json(user);
 }
+
+
+export async function getUserById(req, res, next) {
+    const {id} = req.params;
+    try {
+        var user = await UserService.getUserById(id);
+    } catch ({message}) {
+        return next(
+            {
+                status: 500,
+                message
+            }
+        )
+
+    }
+    return res.json(user);
+}
