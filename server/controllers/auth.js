@@ -58,27 +58,38 @@ export const signup = async(req, res, next) => {
 };
 
 export const signin = async(req, res, next) => {
-    const {login, password} = req.body;
+        const {identifier, password} = req.body;
 
-    const user = await User.findOne({login});
+        const user = await User.findOne({$or: [{"login": identifier}, {"email": identifier}]});
 
-    if (!user) {
-        return next({
-            status: 400,
-            message: 'User not found'
-        })
+        if (!user) {
+            return next({
+                status: 400,
+                message: {
+                    errors: {
+                        form: "Invalid credentials"
+                    }
+                }
+            })
+        }
+
+        try {
+            const result = await  user.comparePasswords(password);
+        } catch (e) {
+            return next({
+                    status: 401,
+                    message: {
+                        errors: {
+                            form: "Invalid credentials"
+                        }
+                    }
+
+                }
+            );
+        }
+
+        req.session.userId = user._id;
+        const token = jwt.sign({_id: user._id}, config.secret);
+        res.json({token});
     }
-
-    try {
-        const result = await  user.comparePasswords(password);
-    } catch (e) {
-        return next({
-            status: 400,
-            message: 'Bad credentials'
-        });
-    }
-
-    req.session.userId = user._id;
-    const token = jwt.sign({_id: user._id}, config.secret);
-    res.json({token});
-};
+    ;

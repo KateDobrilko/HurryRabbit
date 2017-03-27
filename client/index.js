@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import App from './components/App';
 import Greetings from './components/Greetings/Greetings';
 import SignupPage from './components/SignupPage/SignupPage';
+import SigninPage from './components/SigninPage/SigninPage';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -24,6 +25,7 @@ render(
                 <Route path="/" component={App}/>
                 <Route exact path="/" component={Greetings}/>
                 <Route path="/sign-up" component={SignupPage}/>
+                <Route path="/sign-in" component={SigninPage}/>
             </div>
         </Router>
     </Provider>,
