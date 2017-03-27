@@ -9,22 +9,21 @@ export const signup = async(req, res, next) => {
     let user;
 
     const {errors, isValid} = validateInput(credentials);
-    console.log(errors);
 
-    if (!isValid) {
+    if (isValid) {
+        try {
+            user = await User.create(credentials);
+        } catch ({message}) {
+            return next({
+                status: 400,
+                message
+            });
+        }
+        res.json(user)
+    }
+    else{
         res.status(400).json(errors);
     }
-
-    try {
-        user = await User.create(credentials);
-    } catch ({message}) {
-        return next({
-            status: 400,
-            message
-        });
-    }
-
-    res.json(user)
 };
 
 export const signin = async(req, res, next) => {
