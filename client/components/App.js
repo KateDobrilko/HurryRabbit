@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import Greetings from './Greetings/Greetings'
+import NavigationBar from './NavigationBar/NavigationBar'
 
 
 class App extends Component {
     render() {
         return (
-            <Greetings />
+
+            <NavigationBar />
+
         )
     }
 }

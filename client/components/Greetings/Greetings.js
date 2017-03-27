@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 export default () => {
     return (
-        <h1>Hi, master 12!</h1>
+        <div className="jumbotron">
+            <h1>Hi, master 123456!</h1>
+        </div>
     )
 }
