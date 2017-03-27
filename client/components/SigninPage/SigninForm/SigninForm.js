@@ -5,6 +5,7 @@ import {Redirect} from 'react-router';
 import {connect} from 'react-redux';
 import  {userSigninRequest} from '../../../actions/signinActions';
 import  {addFlashMessage} from '../../../actions/flashMessages';
+import {getCurrentUser} from '../../../actions/userActions';
 
 
 class SigninForm extends Component {
@@ -47,6 +48,7 @@ class SigninForm extends Component {
                         type: 'success',
                         text: 'You logged in successfully. Welcome!'
                     });
+                    this.props.getCurrentUser();
                     this.setState({done: true});
                 }
             ).catch((error) => {
@@ -61,11 +63,12 @@ class SigninForm extends Component {
 
 
     render() {
-        const { errors, isLoading, identifier, password } = this.state;
+        const {errors, isLoading, identifier, password} = this.state;
 
         const form = (<form onSubmit={this.onSubmit}>
             <h1>Log in</h1>
-            <div className="form-group">{errors.form && <span className="alert alert-danger col-xs-12">{errors.form}</span>}</div>
+            <div className="form-group">{errors.form &&
+            <span className="alert alert-danger col-xs-12">{errors.form}</span>}</div>
             <TextFieldGroup field="identifier" value={identifier} label="Username /Email"
                             onChange={this.onChange}
                             error={errors.identifier}/>
@@ -87,10 +90,10 @@ class SigninForm extends Component {
 
 SigninForm.propTypes = {
     userSigninRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
+    addFlashMessage: React.PropTypes.func.isRequired,
+    getCurrentUser: React.PropTypes.func.isRequired
 };
 
 
-
 export default connect(null,
-    {userSigninRequest, addFlashMessage})(SigninForm);
+    {userSigninRequest, addFlashMessage, getCurrentUser})(SigninForm);

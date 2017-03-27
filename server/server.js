@@ -58,7 +58,7 @@ app.use(webpackHotMiddleware(compiler));
 
 
 app.use('/api', authRoute);
-app.use('/api',  checkToken, userRoute);
+app.use('/api',   userRoute);
 app.use('/api', checkToken, getUser, pageRoute);
 app.get('/*',  (req, res) => {
     res.sendFile(path.join(__dirname, './index.html'));

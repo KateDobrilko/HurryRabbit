@@ -1,5 +1,6 @@
 import User from '../models/user';
 
+
 export async function getUserByToken(token) {
     const {_id} = token;
 
