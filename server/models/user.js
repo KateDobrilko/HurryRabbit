@@ -5,7 +5,7 @@ const UserSchema = new Schema(
     {
         login: {type: String, unique: true, lowercase: true, index: true},
         password: String,
-        email: String,
+        email: {type: String, unique: true},
         timezone: String
     });
 
