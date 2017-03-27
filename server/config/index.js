@@ -1,6 +1,6 @@
 const config = {
     database: "localhost/hurry-rabbit",
-    port: 3000,
+    port: 9000,
     secret: 'verysecretkey'
 };
 

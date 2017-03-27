@@ -4,6 +4,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import bluebird from 'bluebird';
+import path from 'path';
 
 import config from './config';
 
@@ -15,7 +16,14 @@ import errorHandler from './middlewares/errorHandler';
 import checkToken from './middlewares/checkToken';
 import getUser from './middlewares/getUser';
 
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackConfig from '../webpack.config.dev';
+
 const app = express();
+
+const compiler = webpack(webpackConfig);
 
 mongoose.Promise = bluebird;
 mongoose.connect(config.database, err => {
@@ -39,14 +47,24 @@ app.use(session({
     secret: config.secret
 }));
 
+app.use(webpackMiddleware(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+}));
+
+app.use(webpackHotMiddleware(compiler));
+
+app.get('/',  (req, res) => {
+    res.sendFile(path.join(__dirname, './index.html'));
+});
+
 app.use('/api', authRoute);
 app.use('/api',  checkToken, userRoute);
 app.use(getUser);
 app.use('/api', checkToken, pageRoute);
 
 
-app.get('/test', checkToken, (req, res) => {
-    res.json('test');
-});
+
 
 app.use(errorHandler);
