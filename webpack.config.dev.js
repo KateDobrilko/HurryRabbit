@@ -17,13 +17,27 @@ export default {
         new webpack.HotModuleReplacementPlugin()
     ],
     module: {
-        loaders: [
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
             {
                 test: /\.js$/,
                 include: [path.join(__dirname, 'client'),
                     path.join(__dirname, 'server/shared')],
-                loaders: ['babel-loader']
-            },
+                use: ['babel-loader']
+            }
         ]
     },
     resolve: {
