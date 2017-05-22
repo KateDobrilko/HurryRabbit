@@ -2,9 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import App from './components/App';
-import Greetings from './components/Greetings/Greetings';
-import SignupPage from './components/SignupPage/SignupPage';
-import SigninPage from './components/SigninPage/SigninPage';
+import LoginPage from './components/LoginPage/LoginPage';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
@@ -20,8 +18,7 @@ const store = createStore(
     )
 );
 
-if(localStorage.jwtToken)
-{
+if (localStorage.jwtToken) {
     setAuthorizationToken(localStorage.jwtToken);
     store.dispatch(getCurrentUser());
 }
@@ -31,9 +28,7 @@ render(
         <Router>
             <div className="container">
                 <Route path="/" component={App}/>
-                <Route exact path="/" component={Greetings}/>
-                <Route path="/sign-up" component={SignupPage}/>
-                <Route path="/sign-in" component={SigninPage}/>
+                <Route path="/login" component={LoginPage}/>
             </div>
         </Router>
     </Provider>,
