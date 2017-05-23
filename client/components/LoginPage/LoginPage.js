@@ -4,6 +4,7 @@ import PasswordResetForm from './PasswordResetForm/PasswordResetForm';
 import RegisterForm from './RegisterForm/RegisterForm';
 
 import '../App.scss';
+import './LoginPage.scss';
 
 class LoginPage extends Component {
     render() {
@@ -17,3 +18,4 @@ class LoginPage extends Component {
 
     }
 }
+export default LoginPage;

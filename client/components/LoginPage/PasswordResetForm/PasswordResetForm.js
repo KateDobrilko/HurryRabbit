@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import  {loginTabToggle} from '../../../actions/signinActions';
+import '../LoginForm.scss';
 
 class PasswordResetForm extends Component {
     render() {

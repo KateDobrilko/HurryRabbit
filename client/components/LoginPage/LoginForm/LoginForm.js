@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import  {loginTabToggle} from '../../../actions/signinActions';
+import classnames from 'classnames';
+import '../LoginForm.scss';
+
 
 class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
-            <div className="lc-block">
+            <div className={classnames("lc-block", {'toggled': error})}>
                 <div className="input-group m-b-20">
                     <span className="input-group-addon">
                         <i className="zmdi zmdi-account"></i>
@@ -29,8 +35,8 @@ class LoginForm extends Component {
                 <div className="checkbox">
                     <label>
                         <input type="checkbox" value=""/>
-                            <i className="input-helper"></i>
-                            Keep me signed in
+                        <i className="input-helper"></i>
+                        Keep me signed in
                     </label>
                 </div>
 
@@ -48,6 +54,9 @@ class LoginForm extends Component {
     }
 
 }
+LoginForm.defaultProps = {
+    toggled: false
+};
 
 export default connect(null,
     {loginTabToggle})(LoginForm);

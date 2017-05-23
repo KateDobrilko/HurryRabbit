@@ -1,0 +1,31 @@
+.login-content {
+  text-align: center;
+}
+.login-content:after {
+  content: "";
+  vertical-align: middle;
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+}
+.login-content:before {
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #00BCD4;
+  content: "";
+  z-index: 0;
+}
+.login-content:before {
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #00BCD4;
+  content: "";
+  z-index: 0;
+}
+
